@@ -1,0 +1,61 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "sexp",
+	"patterns": [{ "include": "#sexp_or_comment" }],
+	"repository": {
+		"sexp_or_comment": {
+			"patterns": [
+				{ "include": "#comment" },
+				{ "include": "#list_of_sexp" },
+				{ "include": "#atom" }
+			]
+		},
+		"atom": {
+			"patterns": [
+				{ 
+					"name": "string.quoted.double",
+					"begin": "\"", 
+					"end": "\"" ,
+					"patterns": [
+						{
+							"name": "constant.character.escape",
+							"match": "\\\\."
+						}
+					]
+				},
+				{ 
+					"name": "string.unquoted",
+					"match": "[^\\s\\(\\)\";]+"
+				}
+			]
+		},
+		"list_of_sexp": {
+			"name": "entity.list_of_sexp",
+			"begin": "\\(",
+      "end": "\\)",
+      "patterns": [{ "include": "#sexp_or_comment" }]
+		},
+		"block_comment": {
+			"name": "comment.block",
+			"begin": "#\\|",
+			"end": "\\|#",
+			"patterns": [{ "include": "#block_comment" }]
+		},
+		"comment": {
+			"patterns": [
+				{
+					"name": "comment.line",
+					"match": ";.*(?=$)"
+				},
+				{ "include": "#block_comment" },
+				{
+					"name": "comment.sexp",
+					"begin": "#;\\s*",
+					"end": "(?=[\\s\\)])",
+					"patterns": [{ "include": "#sexp_or_comment" }]
+				}
+			]
+		}
+	},
+	"scopeName": "source.sexp"
+}

@@ -1,0 +1,30 @@
+{
+    "name": "sexp",
+    "displayName": "sexp",
+    "description": "ocaml sexp",
+    "version": "0.0.1",
+    "publisher": "wli75",
+    "engines": {
+        "vscode": "^1.53.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "sexp",
+            "aliases": ["sexp"],
+            "extensions": [".sexp"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "sexp",
+            "scopeName": "source.sexp",
+            "path": "./syntaxes/sexp.tmLanguage.json"
+        }]
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/microsoft/sexp.git"
+    }
+}
